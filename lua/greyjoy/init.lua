@@ -102,6 +102,7 @@ end
 
 greyjoy.to_buffer = function(command)
     local bufnr = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(bufnr, "filetype", "greyjoy")
 
     local append_data = function(_, data)
         if data then
