@@ -112,7 +112,7 @@ greyjoy.to_buffer = function(command)
 
     if greyjoy.show_command_in_output then
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {
-            "output of " .. table.concat(command.command) .. ":"
+            "output of " .. table.concat(command.command, " ") .. ":"
         })
     end
 
