@@ -5,7 +5,7 @@ local _extensions = require("greyjoy._extensions")
 
 -- Override defaults with configuration
 greyjoy.setup = function(options)
-    setmetatable(greyjoy, {__newindex = config.set, __index = config.get})
+    setmetatable(greyjoy, { __newindex = config.set, __index = config.get })
 
     if options ~= nil then
         for k, v in pairs(options) do config.defaults[k] = v end
@@ -20,7 +20,7 @@ greyjoy.setup = function(options)
     if greyjoy.run_groups then
         for group_name, group_plugins in pairs(greyjoy.run_groups) do
             greyjoy.run_group_map[group_name] =
-                greyjoy.run_group_map[group_name] or {}
+            greyjoy.run_group_map[group_name] or {}
 
             for index in ipairs(group_plugins) do
                 greyjoy.run_group_map[group_name][group_plugins[index]] = true
@@ -73,7 +73,7 @@ greyjoy.menu = function(rootdir, elements)
         end
     end
 
-    vim.ui.select(menuelem, {prompt = "Select a command"}, function(label, _)
+    vim.ui.select(menuelem, { prompt = "Select a command" }, function(label, _)
         if label then
             greyjoy.last_element[rootdir] = label
             local command = commands[label]
@@ -150,7 +150,7 @@ local add_elements = function(elements, output)
     for _, elem in pairs(output) do
         if greyjoy.show_command then
             elem["name"] = elem["name"] .. " (" ..
-                               table.concat(elem["command"], " ") .. ")"
+                table.concat(elem["command"], " ") .. ")"
         end
 
         table.insert(elements, elem)
@@ -213,7 +213,7 @@ greyjoy.run = function(arg)
 end
 
 vim.api.nvim_create_user_command("Greyjoy",
-                                 function(args) greyjoy.run(args.args) end,
-                                 {nargs = "*", desc = "Run greyjoy"})
+    function(args) greyjoy.run(args.args) end,
+    { nargs = "*", desc = "Run greyjoy" })
 
 return greyjoy
