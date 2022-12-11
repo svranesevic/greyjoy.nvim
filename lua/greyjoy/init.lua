@@ -106,7 +106,9 @@ greyjoy.to_buffer = function(command)
 
     local append_data = function(_, data)
         if data then
+            vim.api.nvim_buf_set_option(bufnr, "modifiable", true)
             vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+            vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
         end
     end
 
@@ -131,6 +133,7 @@ greyjoy.to_buffer = function(command)
         focusable = true
     }
 
+    vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
     vim.api.nvim_open_win(bufnr, 1, opts)
 
     vim.fn.jobstart(command.command, {
